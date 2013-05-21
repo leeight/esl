@@ -318,7 +318,13 @@ function localLoadCss( stateTd, callback ) {
     var len = buttons.length;
     function checkNext() {
         if ( index < len ) {
-            checking( buttons[ index++ ], checkNext );
+            var button = buttons[ index++ ];
+            if ( button.disabled ) {
+                checkNext();
+            }
+            else {
+                checking( button, checkNext );
+            }
         }
         else {
             alert( (new Date) - now)
